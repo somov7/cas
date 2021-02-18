@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+    production: true,
+    apiUrl: 'https://content-aware-scaling-server.herokuapp.com'
 };

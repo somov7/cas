@@ -1,7 +1,9 @@
 <div class="container">
-    <form #scaleForm="ngForm" (ngSubmit)="onSubmit($event)">
-        <input type="file" id="image" (change)="saveImage($event)"/><br />
-        <input type="submit" value="Submit">
+    <form (ngSubmit)="onSubmit($event)">
+        <input #file type="file" id="image" (change)="saveImage($event)"/><br />
+        <input type="submit" [disabled]="!isValid()" value="Submit">
     </form>
-    <img *ngIf="loaded" [src]="gif" alt="Loading...">
+    <div *ngIf="state=='loading'" class="loader"></div>
+    <img *ngIf="state=='loaded'" [src]="gif" alt="Loading...">
+    <div *ngIf="state=='error'">Oops, something went wrong</div>
 </div>
