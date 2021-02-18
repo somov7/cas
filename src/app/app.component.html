@@ -1,0 +1,7 @@
+<div class="container">
+    <form #scaleForm="ngForm" (ngSubmit)="onSubmit($event)">
+        <input type="file" id="image" (change)="saveImage($event)"/><br />
+        <input type="submit" value="Submit">
+    </form>
+    <img *ngIf="loaded" [src]="gif" alt="Loading...">
+</div>
