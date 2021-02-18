@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import {FormBuilder} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -10,32 +10,32 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class AppComponent {
     image: File = undefined;
-    loaded: boolean = false;
+    loaded = false;
     gif = undefined;
 
     constructor(private formBuilder: FormBuilder, private http: HttpClient, private sanitizer: DomSanitizer) {
     }
 
     saveImage(event): void {
-        this.image = <File>event.target.files[0]
+        this.image = (event.target.files[0] as File);
     }
 
     onSubmit(event): void {
-        event.preventDefault()
+        event.preventDefault();
         this.loaded = true;
-        let formData:FormData = new FormData()
-        formData.append('image', this.image)
+        const formData: FormData = new FormData();
+        formData.append('image', this.image);
         this.http.post(`http://localhost:8000/scale`,
             formData,
-            {'responseType': 'blob'})
+            {responseType: 'blob'})
             .subscribe(
                 data => {
-                    console.log(data)
-                    let objectURL = URL.createObjectURL(data);
+                    console.log(data);
+                    const objectURL = URL.createObjectURL(data);
                     this.gif = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-                    console.log(this.gif)
+                    console.log(this.gif);
                 }
-            )
+            );
     }
 
 
