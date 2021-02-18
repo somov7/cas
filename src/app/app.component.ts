@@ -25,7 +25,7 @@ export class AppComponent {
         this.loaded = true;
         const formData: FormData = new FormData();
         formData.append('image', this.image);
-        this.http.post(`http://localhost:8000/scale`,
+        this.http.post(`https://content-aware-scaling-server.herokuapp.com/scale`,
             formData,
             {responseType: 'blob'})
             .subscribe(
